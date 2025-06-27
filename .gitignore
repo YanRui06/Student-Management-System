@@ -39,3 +39,14 @@ buildNumber.properties
 
 ### Mac OS ###
 .DS_Store
+
+# 数据库配置文件 - 包含敏感信息，不要上传到GitHub
+src/main/resources/database.properties
+
+# 其他敏感配置文件
+*.env
+config.properties
+application-local.properties
+
+# 日志文件
+*.log

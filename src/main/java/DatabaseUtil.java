@@ -3,22 +3,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseUtil {
-    private static final String URL = "jdbc:mysql://yourlocalhost/student_management?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=utf8&useUnicode=true";
-    private static final String USERNAME = "yourusername"; // 请替换为实际用户名
-    private static final String PASSWORD = "yourpassword"; // 请替换为实际密码
     
     static {
+        loadJDBCDriver();
+    }
+    
+    private static void loadJDBCDriver() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("MySQL JDBC驱动加载成功");
+            Class.forName(ConfigManager.getDatabaseDriver());
+            System.out.println("✓ MySQL JDBC驱动加载成功");
         } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC驱动未找到: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("✗ MySQL JDBC驱动未找到: " + e.getMessage());
+            throw new RuntimeException("无法加载数据库驱动", e);
         }
     }
     
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        return DriverManager.getConnection(
+            ConfigManager.getDatabaseUrl(),
+            ConfigManager.getDatabaseUsername(),
+            ConfigManager.getDatabasePassword()
+        );
     }
     
     public static void closeConnection(Connection connection) {
