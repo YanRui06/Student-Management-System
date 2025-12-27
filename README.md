@@ -133,6 +133,49 @@ Student-Management-System/
 - 安全的数据库连接配置
 - 输入数据验证
 
+## 查看项目Fork信息
+
+想知道谁复刻（Fork）了本项目？我们提供了以下方式：
+
+**详细说明请参考：[查看Fork信息.md](./查看Fork信息.md)**
+
+### 方法一：使用脚本查询（推荐）
+
+运行项目提供的Fork信息查询脚本：
+
+```bash
+./check-forks.sh
+```
+
+该脚本会自动获取并显示：
+- Fork的用户列表
+- Fork的时间
+- Fork仓库的地址
+- 每个Fork的Star和Fork数量
+
+**提示**: 安装 `jq` 工具可以获得更好的显示效果：
+- Ubuntu/Debian: `sudo apt-get install jq`
+- macOS: `brew install jq`
+
+### 方法二：访问GitHub网页
+
+直接访问GitHub的网络图查看Fork信息：
+
+```
+https://github.com/YanRui06/Student-Management-System/network/members
+```
+
+或者在项目主页点击右上角的"Fork"按钮旁边的数字，即可查看所有Fork的仓库列表。
+
+### 方法三：使用GitHub API
+
+你也可以直接使用GitHub API查询：
+
+```bash
+curl -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/YanRui06/Student-Management-System/forks
+```
+
 ## 许可证
 
 MIT License
